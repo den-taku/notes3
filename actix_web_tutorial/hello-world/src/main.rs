@@ -1,31 +1,21 @@
-use actix_web::{web, App, HttpResponse, HttpServer};
+use actix_web::{get, App, HttpRequest, HttpServer, Responder};
+use openssl::ssl::{SslAcceptor, SslFiletype, SslMethod};
 
-fn scoped_config(cfg: &mut web::ServiceConfig) {
-    cfg.service(
-        web::resource("/test")
-            .route(web::get().to(|| HttpResponse::Ok().body("test")))
-            .route(web::head().to(|| HttpResponse::MethodNotAllowed())),
-    );
-}
-
-fn config(cfg: &mut web::ServiceConfig) {
-    cfg.service(
-        web::resource("/app")
-            .route(web::get().to(|| HttpResponse::Ok().body("app")))
-            .route(web::head().to(|| HttpResponse::MethodNotAllowed())),
-    );
+#[get("/")]
+async fn index(_req: HttpRequest) -> impl Responder {
+    "Welcome!"
 }
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    HttpServer::new(|| {
-        App::new()
-            .configure(config)
-            .service(web::scope("/api"))
-            .configure(scoped_config)
-            .route("/", web::get().to(|| HttpResponse::Ok().body("/")))
-    })
-    .bind("127.0.0.1:8080")?
-    .run()
-    .await
+    let mut builder = SslAcceptor::mozilla_intermediate(SslMethod::tls()).unwrap();
+    builder
+        .set_private_key_file("key.pem", SslFiletype::PEM)
+        .unwrap();
+    builder.set_certificate_chain_file("filcert.peme").unwrap();
+
+    HttpServer::new(|| App::new().service(index))
+        .bind_openssl("127.0.0.1:8080r", builder)?
+        .run()
+        .await
 }
