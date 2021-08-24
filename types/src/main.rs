@@ -1,6 +1,6 @@
-use i64 as irf;
+type Irf = i64;
 
 fn main() {
-    let a: irf = 90;
+    let a: Irf = 90;
     println!("{}", a);
 }
