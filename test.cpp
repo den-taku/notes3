@@ -40,4 +40,11 @@ int main() {
     std::cout << std::upper_bound(u.rbegin(), u.rend(), 8) - u.rbegin() << std::endl;
     std::cout << std::upper_bound(u.rbegin(), u.rend(), 9) - u.rend() << std::endl;
 
+    if (3 > 4) {
+        goto tets;
+    }
+    std::cout << "false" << std::endl;
+
+tets:
+    std::cout << "end" << std::endl;
 }
