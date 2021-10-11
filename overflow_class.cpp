@@ -4,7 +4,11 @@
 #include <iostream>
 #include "class.h"
 
+class B;
+
 class A {
+    public:
+        A(){};
     private:
         B b;
 };
