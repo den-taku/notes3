@@ -84,7 +84,7 @@ solver.add_constr(sin <= S)
 # 今回はDの最大化なので以下のように書きます
 solver.objective = maximize(D)
 
-# 定式化したモデルを特にはこのメソッドを呼び出します．
+# 定式化したモデルを解くにはこのメソッドを呼び出します．
 # 返り値は結果のステータスです
 # 計算の過程がログとして出力されます
 status = solver.optimize()
