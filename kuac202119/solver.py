@@ -95,19 +95,19 @@ if status == OptimizationStatus.OPTIMAL:
     for i in range(l):
         if a[i].x >= 0.99:
             head = i
-            print("頭装備は{}番目のものを使用".format(head))
+            print("頭装備は{}番目のものを使用".format(head + 1))
             break
     body = 0
     for i in range(m):
         if b[i].x >= 0.99:
             body = i
-            print("体装備は{}番目のものを使用".format(body))
+            print("体装備は{}番目のものを使用".format(body + 1))
             break
     hand = 0
     for i in range(m):
         if c[i].x >= 0.99:
             hand = i
-            print("武器は{}番目のものを使用".format(hand))
+            print("武器は{}番目のものを使用".format(hand + 1))
             break
     print("物理:{}，魔法:{}，速度:{}，防御力:{}，ランク:{}".format(P.x, M.x, S.x, D.x, R.x))
 else:
