@@ -41,6 +41,7 @@ solver = Model("最強装備シミュレータ(仮)")
 # その変数へのアドレスが返ってくるので，それをa，b，cという配列に保存しておきます．
 # 変数は0か1しかとらないのでBINARYという種類の変数として定義しています．
 # INTEGERとして定義して，後で制約で0以上1以下と追加しても問題としては同じです．
+# CONTINUOUSとして定義すると実数値を取ることができ，混合整数計画問題が解けます
 a = [solver.add_var('a{}'.format(i), var_type=BINARY) for i in range(l)]
 b = [solver.add_var('b{}'.format(i), var_type=BINARY) for i in range(m)]
 c = [solver.add_var('c{}'.format(i), var_type=BINARY) for i in range(n)]
